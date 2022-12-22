@@ -18,7 +18,7 @@
         <NoWarn>$(NoWarn);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002</NoWarn>
         <NoError>$(NoError);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002</NoError>
         <ReportAnalyzer>true</ReportAnalyzer>
-        <AnalysisMode>Default</AnalysisMode>
+        <AnalysisMode>All</AnalysisMode>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
 
         <Company>Mohsen Rajabi</Company>
@@ -27,8 +27,15 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/EngRajabi/Enum.Source.Generator</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/EngRajabi/Enum.Source.Generator</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0">
             <PrivateAssets>all</PrivateAssets>
@@ -65,6 +72,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>
