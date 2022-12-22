@@ -1,6 +1,6 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/EngRajabi/MediatR.Useful.Behaviors/master/LICENSE)
-[![Nuget](https://img.shields.io/nuget/dt/MediatR.Useful.Behaviors?label=Nuget.org%20Downloads&style=flat-square&color=blue)](https://www.nuget.org/packages/MediatR.Useful.Behavior)
-[![Nuget](https://img.shields.io/nuget/vpre/MediatR.Useful.Behaviors.svg?label=NuGet)](https://www.nuget.org/packages/MediatR.Useful.Behavior)
+[![Nuget](https://img.shields.io/nuget/dt/MediatR.Useful.Behavior?label=Nuget.org%20Downloads&style=flat-square&color=blue)](https://www.nuget.org/packages/MediatR.Useful.Behavior)
+[![Nuget](https://img.shields.io/nuget/vpre/MediatR.Useful.Behavior.svg?label=NuGet)](https://www.nuget.org/packages/MediatR.Useful.Behavior)
 
 
 # The best behaviors of Mediatr
