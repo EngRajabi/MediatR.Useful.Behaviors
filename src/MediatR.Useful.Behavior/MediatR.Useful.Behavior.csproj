@@ -3,11 +3,18 @@
     <PropertyGroup>
         <TargetFrameworks>netstandard2.1</TargetFrameworks>
         <Product>MediatR Useful Behavior</Product>
-        <Description>MediatR Useful Behavior</Description>
-        <Version>1.0.2</Version>
-        <AssemblyVersion>1.0.2</AssemblyVersion>
-        <PackageVersion>1.0.2</PackageVersion>
-        <PackageTags>MediatR Useful Behavior, MediatR Helper, MediatR Useful Helper, Enrich MediatR</PackageTags>
+        <Description>
+            MediatR Useful Behavior
+            In this repository; I tried to write and save the best popular behaviors that we use in mediatr in a professional way. And they will be added and improved over time.
+            The best library to complete mediatr
+        </Description>
+        <Version>1.0.3</Version>
+        <AssemblyVersion>1.0.3</AssemblyVersion>
+        <PackageVersion>1.0.3</PackageVersion>
+        <PackageTags>
+            mediatr;mediator;behavior;response;cache;validation;behaviors;distributedcache;fluent;fluentvalidation;distributecache;MediatR Useful Behavior;
+            enrich;enrichmediatr
+        </PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
             v1.0.2
