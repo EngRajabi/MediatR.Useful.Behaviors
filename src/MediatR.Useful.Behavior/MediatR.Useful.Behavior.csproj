@@ -17,6 +17,10 @@
         </PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
+            v1.0.3
+            Breaking changes
+            - update doc
+            - add example
             v1.0.2
             Breaking changes
             - add Scrutor for automatic validator added
