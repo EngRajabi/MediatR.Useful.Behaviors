@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MediatR.Useful.Behavior\MediatR.Useful.Behavior.csproj" />
+	  <ProjectReference Include="..\..\src\MediatR.Useful.Behavior\MediatR.Useful.Behavior.csproj" />
 	</ItemGroup>
 
 </Project>
