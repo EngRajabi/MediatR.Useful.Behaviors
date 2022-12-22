@@ -12,7 +12,7 @@
         <PackageReleaseNotes>
             v1.0.0
             Breaking changes
-            - new release
+            - add cache behavior
         </PackageReleaseNotes>
         <Title>MediatR Useful Behavior</Title>
         <PackageIcon>icon.png</PackageIcon>

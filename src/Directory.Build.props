@@ -28,8 +28,8 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/EngRajabi/Enum.Source.Generator</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/EngRajabi/Enum.Source.Generator</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/EngRajabi/MediatR.Useful.Behaviors</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/EngRajabi/MediatR.Useful.Behaviors</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
