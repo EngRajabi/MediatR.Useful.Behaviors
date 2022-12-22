@@ -4,12 +4,18 @@
         <TargetFrameworks>netstandard2.1</TargetFrameworks>
         <Product>MediatR Useful Behavior</Product>
         <Description>MediatR Useful Behavior</Description>
-        <Version>1.0.1</Version>
-        <AssemblyVersion>1.0.1</AssemblyVersion>
-        <PackageVersion>1.0.1</PackageVersion>
+        <Version>1.0.2</Version>
+        <AssemblyVersion>1.0.2</AssemblyVersion>
+        <PackageVersion>1.0.2</PackageVersion>
         <PackageTags>MediatR Useful Behavior, MediatR Helper, MediatR Useful Helper, Enrich MediatR</PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
+            v1.0.2
+            Breaking changes
+            - add Scrutor for automatic validator added
+            v1.0.1
+            Breaking changes
+            - clean up dependency
             v1.0.0
             Breaking changes
             - add cache behavior
@@ -37,6 +43,7 @@
         <PackageReference Include="MediatR" Version="11.1.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
         <PackageReference Include="System.Text.Json" Version="7.0.1" />
+        <PackageReference Include="Scrutor" Version="4.2.0" />
     </ItemGroup>
 
 </Project>

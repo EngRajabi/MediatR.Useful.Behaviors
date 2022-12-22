@@ -1,5 +1,7 @@
-﻿using MediatR.Useful.Behavior.Behavior;
+﻿using FluentValidation;
+using MediatR.Useful.Behavior.Behavior;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace MediatR.Useful.Behavior.DependencyInjection;
 public static class ServiceCollectionExtensions
@@ -9,6 +11,15 @@ public static class ServiceCollectionExtensions
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehavior<,>));
+
+        var assemblys = AppDomain.CurrentDomain.GetAssemblies();
+
+        services.Scan(selector => selector
+            .FromAssemblies(assemblys)
+            .AddClasses(filter => filter.AssignableTo(typeof(IValidator<>)).Where(r =>
+                !r.IsAbstract && r.IsClass && !r.IsGenericType && r.IsPublic
+            ))
+            .AsImplementedInterfaces());
     }
 
     public static void AddCacheBehaviors(this IServiceCollection services)
