@@ -13,6 +13,7 @@
             v1.0.0
             Breaking changes
             - add cache behavior
+            - add valdiation behavior
         </PackageReleaseNotes>
         <Title>MediatR Useful Behavior</Title>
         <PackageIcon>icon.png</PackageIcon>

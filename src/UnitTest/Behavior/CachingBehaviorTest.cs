@@ -2,13 +2,13 @@
 using MediatR;
 using MediatR.Useful.Behavior;
 using MediatR.Useful.Behavior.Behavior;
-using MediatR.Useful.Behavior.Model;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnitTest.Model;
 using Xunit;
 
 namespace UnitTest.Behavior;
@@ -169,25 +169,6 @@ public sealed class CachingBehaviorTest : TestBase
             };
         }
     }
-}
-
-public sealed class GetUserPointCommandReq : IRequest<GetUserPointCommandRes>,
-    ICacheableRequest<GetUserPointCommandRes>
-{
-    public GetUserPointCommandReq(Func<GetUserPointCommandRes, DateTimeOffset> conditionExpiration,
-        Func<GetUserPointCommandRes, bool> conditionFroSetCache, bool useMemoryCache = false)
-    {
-        ConditionExpiration = conditionExpiration;
-        ConditionFroSetCache = conditionFroSetCache;
-        UseMemoryCache = useMemoryCache;
-        UserId = Guid.NewGuid().ToString();
-    }
-
-    public string UserId { get; set; }
-    public string CacheKey => $"test.userpoint.{UserId}";
-    public Func<GetUserPointCommandRes, DateTimeOffset> ConditionExpiration { get; }
-    public bool UseMemoryCache { get; }
-    public Func<GetUserPointCommandRes, bool> ConditionFroSetCache { get; }
 }
 
 public sealed class GetUserPointCommandRes

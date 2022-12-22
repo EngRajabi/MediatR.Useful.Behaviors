@@ -8,7 +8,6 @@ namespace MediatR.Useful.Behavior.Behavior;
 
 public sealed class CacheInvalidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>, ICacheInvalidatorRequest
-    where TResponse : new()
 {
     private readonly IDistributedCache _distributedCache;
 

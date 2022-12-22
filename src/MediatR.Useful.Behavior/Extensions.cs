@@ -22,17 +22,6 @@ public static class Extensions
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
     };
 
-    //public static async Task<TEntity> GetEntityAsync<TEntity>(this IDistributedCache distributedCache, string key, CancellationToken cancellationToken = default)
-    //{
-    //    var itemBytes = await distributedCache.GetAsync(key, cancellationToken).ConfigureAwait(false);
-    //    if (itemBytes == null)
-    //        return default;
-
-    //    var itemString = Encoding.UTF8.GetString(itemBytes);
-    //    return itemString.ToObject<TEntity>();
-    //}
-
-
     public static T ToObject<T>(this string source)
     {
         return JsonSerializer.Deserialize<T>(source, JsonSerializerOptions);
