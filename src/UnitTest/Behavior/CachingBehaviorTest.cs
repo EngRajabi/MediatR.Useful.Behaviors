@@ -1,0 +1,197 @@
+﻿using FluentAssertions;
+using MediatR;
+using MediatR.Useful.Behavior;
+using MediatR.Useful.Behavior.Behavior;
+using MediatR.Useful.Behavior.Model;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace UnitTest.Behavior;
+
+public sealed class CachingBehaviorTest : TestBase
+{
+    private readonly Mock<RequestHandlerDelegate<GetUserPointCommandRes>> _behaviourDelegate;
+    private readonly Mock<IDistributedCache> _cahce;
+    private readonly Mock<IMemoryCache> _memoryCache;
+
+    public CachingBehaviorTest()
+    {
+        _behaviourDelegate = new Mock<RequestHandlerDelegate<GetUserPointCommandRes>>();
+        _cahce = new Mock<IDistributedCache>();
+        _memoryCache = new Mock<IMemoryCache>();
+    }
+
+
+    [Theory]
+    [MemberData(nameof(TestCases))]
+    public async Task CheckDistributeCache(GetUserPointCommandRes resultBehaviour, GetUserPointCommandRes resultCache,
+        Func<GetUserPointCommandRes, DateTimeOffset> conditionExpiration,
+        Func<GetUserPointCommandRes, bool> conditionFroSetCache,
+        int countBehaviurCall, int callGetCache, int callSetCache)
+    {
+        //Arrange
+        var requestCommandRq = new GetUserPointCommandReq(conditionExpiration, conditionFroSetCache);
+        var behavior = new CachingBehavior<GetUserPointCommandReq,
+            GetUserPointCommandRes>(_cahce.Object, _memoryCache.Object);
+
+        _behaviourDelegate.Setup(r => r.Invoke())
+            .ReturnsAsync(resultBehaviour);
+
+        _cahce.Setup(r => r.GetAsync(It.IsAny<string>(), default))
+            .ReturnsAsync(resultCache.ToJsonUtf8Bytes());
+
+
+        //Act
+        var handle = await RunBehaviour(behavior, requestCommandRq, _behaviourDelegate.Object);
+
+        //Assert
+        _behaviourDelegate.Verify(r => r.Invoke(), Times.Exactly(countBehaviurCall));
+        _cahce.Verify(r => r.GetAsync(
+                It.Is<string>(r => r.Equals(requestCommandRq.CacheKey)), default), Times.Exactly(callGetCache));
+
+        _cahce.Verify(r => r.SetAsync(It.Is<string>(r => r.Equals(requestCommandRq.CacheKey)),
+            resultBehaviour.ToJsonUtf8Bytes(), It.Is<DistributedCacheEntryOptions>(r =>
+                Math.Abs((r.AbsoluteExpiration.Value - requestCommandRq.ConditionExpiration(resultBehaviour)).TotalSeconds) < 10),
+            default), Times.Exactly(callSetCache));
+
+        handle.Should().BeEquivalentTo(resultBehaviour ?? resultCache);
+    }
+
+    public static IEnumerable<object[]> TestCases
+    {
+#pragma warning disable MA0051 // Method is too long
+        get
+#pragma warning restore MA0051 // Method is too long
+        {
+            yield return new object[]
+            {
+                //method
+                null,
+                //cache
+                null,
+                (Func<GetUserPointCommandRes, DateTimeOffset>) (x => DateTimeOffset.Now.AddMinutes(10)),
+                null,
+                //behavoiur
+                1,
+                //get cache
+                1,
+                //set cache
+                0
+            };
+            yield return new object[]
+            {
+                //method
+                null,
+                //cache
+                null,
+                null,
+                null,
+                //behavoiur
+                1,
+                //get cache
+                1,
+                //set cache
+                0
+            };
+            yield return new object[]
+            {
+                //method
+                null,
+                //cache
+                null,
+                null,
+                null,
+                //behavoiur
+                1,
+                //get cache
+                1,
+                //set cache
+                0
+            };
+            yield return new object[]
+            {
+                //method
+                null,
+                //cache
+                new GetUserPointCommandRes
+                {
+                    Point = 42.0m
+                },
+                null,
+                null,
+                //behavoiur
+                0,
+                //get cache
+                1,
+                //set cache
+                0
+            };
+            yield return new object[]
+            {
+                //method
+                new GetUserPointCommandRes
+                {
+                    Point = 42.0m
+                },
+                //cache
+                null,
+                (Func<GetUserPointCommandRes, DateTimeOffset>) (x => DateTimeOffset.Now.AddMinutes(10)),
+                (Func<GetUserPointCommandRes, bool>)(res => true),
+                //behavoiur
+                1,
+                //get cache
+                1,
+                //set cache
+                1
+            };
+            yield return new object[]
+            {
+                //method
+                new GetUserPointCommandRes
+                {
+                    Point = 42.0m
+                },
+                //cache
+                null,
+                (Func<GetUserPointCommandRes, DateTimeOffset>) (x => DateTimeOffset.Now.AddMinutes(10)),
+                (Func<GetUserPointCommandRes, bool>)(res => false),
+                //behavoiur
+                1,
+                //get cache
+                1,
+                //set cache
+                0
+            };
+        }
+    }
+}
+
+public sealed class GetUserPointCommandReq : IRequest<GetUserPointCommandRes>,
+    ICacheableRequest<GetUserPointCommandRes>
+{
+    public GetUserPointCommandReq(Func<GetUserPointCommandRes, DateTimeOffset> conditionExpiration,
+        Func<GetUserPointCommandRes, bool> conditionFroSetCache, bool useMemoryCache = false)
+    {
+        ConditionExpiration = conditionExpiration;
+        ConditionFroSetCache = conditionFroSetCache;
+        UseMemoryCache = useMemoryCache;
+        UserId = Guid.NewGuid().ToString();
+    }
+
+    public string UserId { get; set; }
+    public string CacheKey => $"test.userpoint.{UserId}";
+    public Func<GetUserPointCommandRes, DateTimeOffset> ConditionExpiration { get; }
+    public bool UseMemoryCache { get; }
+    public Func<GetUserPointCommandRes, bool> ConditionFroSetCache { get; }
+}
+
+public sealed class GetUserPointCommandRes
+{
+    public decimal Point { get; set; }
+}
+

@@ -1,0 +1,74 @@
+<Project>
+    <PropertyGroup>
+        <LangVersion>11.0</LangVersion>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+        <EnablePackageValidation>true</EnablePackageValidation>
+        <!--
+      CA2007: Consider calling ConfigureAwait on the awaited task
+      MA0004: Use Task.ConfigureAwait(false) as the current SynchronizationContext is not needed
+      CA1056: Change the type of property 'Url' from 'string' to 'System.Uri'
+      CA1054: Change the type of parameter of the method to allow a Uri to be passed as a 'System.Uri' object
+      CA1055: Change the return type of method from 'string' to 'System.Uri'
+    -->
+        <NoWarn>$(NoWarn);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002</NoWarn>
+        <NoError>$(NoError);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002</NoError>
+        <ReportAnalyzer>true</ReportAnalyzer>
+        <AnalysisMode>Default</AnalysisMode>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+
+        <Company>Mohsen Rajabi</Company>
+        <Copyright>MohsenRajabi@2022</Copyright>
+        <Authors>Mohsen Rajabi</Authors>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.4.27">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Roslynator.Analyzers" Version="4.2.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.2.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.2.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+        <PackageReference Include="Meziantou.Analyzer" Version="1.0.757">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)BannedSymbols.txt" Link="Properties/BannedSymbols.txt" />
+        <Compile Include="$(MSBuildThisFileDirectory)/AssemblyInfo.cs" Link="Properties/AssemblyInfo.common.cs" />
+    </ItemGroup>
+</Project>
