@@ -4,9 +4,9 @@
         <TargetFrameworks>netstandard2.1</TargetFrameworks>
         <Product>MediatR Useful Behavior</Product>
         <Description>MediatR Useful Behavior</Description>
-        <Version>1.0.0</Version>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <PackageVersion>1.0.0</PackageVersion>
+        <Version>1.0.1</Version>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <PackageVersion>1.0.1</PackageVersion>
         <PackageTags>MediatR Useful Behavior, MediatR Helper, MediatR Useful Helper, Enrich MediatR</PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
