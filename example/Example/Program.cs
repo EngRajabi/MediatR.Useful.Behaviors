@@ -1,4 +1,7 @@
 
+using MediatR;
+using MediatR.Useful.Behavior.DependencyInjection;
+
 namespace Example;
 
 public static class Program
@@ -9,12 +12,16 @@ public static class Program
 
         // Add services to the container.
 
+        builder.Services.AddMediatR(typeof(Program).Assembly);
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddMemoryCache();
         builder.Services.AddDistributedMemoryCache();
+
+        // add AddAllBehaviors (cache, validation)
+        builder.Services.AddAllBehaviors();
 
         var app = builder.Build();
 

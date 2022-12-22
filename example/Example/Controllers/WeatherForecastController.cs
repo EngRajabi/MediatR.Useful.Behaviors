@@ -1,8 +1,10 @@
+using Example.Command;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Example.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -11,10 +13,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IMediator _mediator;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
     {
         _logger = logger;
+        _mediator = mediator;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -27,5 +31,21 @@ public class WeatherForecastController : ControllerBase
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> TestCmdErrorValidation()
+    {
+        var commandRs = await _mediator.Send(new TestCommandRq(), default);
+
+        return Ok(commandRs);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> TestCmdCache()
+    {
+        var commandRs = await _mediator.Send(new TestCommandRq { Amount = 10000 }, default);
+
+        return Ok(commandRs);
     }
 }
