@@ -26,6 +26,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Useful.Behavior", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "test\UnitTest\UnitTest.csproj", "{3B157CBA-46AB-41EB-9E9C-EE6470E2C159}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{04282C3C-A3F4-4C71-B391-CC3ADF68F76E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "example\Example\Example.csproj", "{3587539F-8313-434A-A9A4-BAAC93BC0DB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +44,10 @@ Global
 		{3B157CBA-46AB-41EB-9E9C-EE6470E2C159}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B157CBA-46AB-41EB-9E9C-EE6470E2C159}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B157CBA-46AB-41EB-9E9C-EE6470E2C159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3587539F-8313-434A-A9A4-BAAC93BC0DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3587539F-8313-434A-A9A4-BAAC93BC0DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3587539F-8313-434A-A9A4-BAAC93BC0DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3587539F-8313-434A-A9A4-BAAC93BC0DB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +55,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5272A6D5-18BE-47CA-AF70-AFF586A66F07} = {EB67E851-A2EA-4731-A3A5-01D615A3AAA2}
 		{3B157CBA-46AB-41EB-9E9C-EE6470E2C159} = {9034ACAE-6D26-4B4A-B8E1-6E5C610550E6}
+		{04282C3C-A3F4-4C71-B391-CC3ADF68F76E} = {EB67E851-A2EA-4731-A3A5-01D615A3AAA2}
+		{3587539F-8313-434A-A9A4-BAAC93BC0DB1} = {04282C3C-A3F4-4C71-B391-CC3ADF68F76E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5AEA13C4-9243-49C3-B054-D4EDC6898F50}
