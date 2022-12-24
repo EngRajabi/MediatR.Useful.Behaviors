@@ -46,7 +46,7 @@ builder.Services.AddAllBehaviors();
 
 By doing this, behaviors are added to the system. Also, all your validations are added to the system
 
-**Cache**
+# Cache
 Your command must use the ICacheableRequest interface. This interface has several properties that must be set
 
 To use cache, you must first introduce cache services to the system
@@ -99,7 +99,7 @@ public sealed class TestCommandAdRq : IRequest<TestCommandRs>, ICacheableRequest
 ```
 
 
-**Validation**
+# Validation
 Before executing your command, the system first executes all your validations.
 For validation, you only need to define your model in this way
  ```csharp
@@ -112,11 +112,24 @@ public sealed class TestCommandRqValidation : AbstractValidator<TestCommandRq>
 }
 ```
 
-**Performance Log**
+# Performance Log
+If the command takes more than 1 second. The system records a warning log. With complete specifications of the command and input data.
 exmaple log
 
- ```csharp
+```csharp
 Performance Long Running Request: TestCommandRq 3274 millisecond. {"amount":10000,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
+```
+
+# Unhandle Log
+If an Exception occurs in the command. This behavior records a log with full details.
+exmaple log
+
+```csharp
+Exception Request: Unhandled Exception for Request TestCommandRq {"amount":0,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
+      FluentValidation.ValidationException: Validation failed:
+       -- Amount: 'Amount' must be greater than '0'. Severity: Error
+         at MediatR.Useful.Behavior.Behavior.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in F:\Projects\mediatR-useful-behavior\src\MediatR.Useful.Behavior\Behavior\ValidationBehaviour.cs:line 36
+         at MediatR.Useful.Behavior.Behavior.UnhandledExceptionBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in F:\Projects\mediatR-useful-behavior\src\MediatR.Useful.Behavior\Behavior\UnhandledExceptionBehaviour.cs:line 21
 ```
 
 ## Contributing
