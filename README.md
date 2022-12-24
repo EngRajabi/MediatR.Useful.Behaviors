@@ -30,7 +30,7 @@ Add the package to your application using
 ```bash
 dotnet add package MediatR.Useful.Behavior
 ```
-To use, you can add all behaviors at once. Or add each separately
+**To use, you can add all behaviors at once. Or add each separately**
 - AddAllBehaviors: Add all behaviors
 - AddCacheBehavior: Add behavior for cache
 - AddValidationBehavior: Add validation behavior
