@@ -8,9 +8,11 @@ public static class ServiceCollectionExtensions
 {
     public static void AddAllBehaviors(this IServiceCollection services)
     {
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 
         var assemblys = AppDomain.CurrentDomain.GetAssemblies();
 
@@ -22,14 +24,24 @@ public static class ServiceCollectionExtensions
             .AsImplementedInterfaces());
     }
 
-    public static void AddCacheBehaviors(this IServiceCollection services)
+    public static void AddCacheBehavior(this IServiceCollection services)
     {
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehavior<,>));
     }
 
-    public static void AddValidationBehaviors(this IServiceCollection services)
+    public static void AddValidationBehavior(this IServiceCollection services)
     {
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+    }
+
+    public static void AddUnhandledExceptionBehavior(this IServiceCollection services)
+    {
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+    }
+
+    public static void AddPerformanceBehavior(this IServiceCollection services)
+    {
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
     }
 }
