@@ -22,7 +22,7 @@ In this package, I tried to collect the best and most useful behaviors of mediat
 - Automatic validation
 - Automatic logging of unknown errors
 - Logging slow commands
-**
+
 
 Add the package to your application using
 
