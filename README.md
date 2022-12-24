@@ -114,7 +114,7 @@ public sealed class TestCommandRqValidation : AbstractValidator<TestCommandRq>
 
 # Performance Log
 If the command takes more than 1 second. The system records a warning log. With complete specifications of the command and input data.
-exmaple log
+example log
 
 ```csharp
 Performance Long Running Request: TestCommandRq 3274 millisecond. {"amount":10000,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
@@ -122,7 +122,7 @@ Performance Long Running Request: TestCommandRq 3274 millisecond. {"amount":1000
 
 # Unhandle Log
 If an Exception occurs in the command. This behavior records a log with full details.
-exmaple log
+example log
 
 ```csharp
 Exception Request: Unhandled Exception for Request TestCommandRq {"amount":0,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
