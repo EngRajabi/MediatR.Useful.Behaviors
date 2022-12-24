@@ -8,7 +8,7 @@
  </a>
 </p>
 
-# The best behaviors of Mediatr ( Enrich your mediatr project )
+# The best behaviors of MediatR ( Enrich your mediatr project )
 
 We all used mediatr many times. In mediatr, we have a very popular behavior feature that allows us to program aop and cross cutting. We have used it many times. 
 But it must have happened to you that you did not combine these behaviors together. 
@@ -17,9 +17,12 @@ In this package, I tried to collect the best and most useful behaviors of mediat
 
 **Package** - [MediatR.Useful.Behavior](https://www.nuget.org/packages/MediatR.Useful.Behavior/)
 
-Currently, there are 2 very popular and efficient behaviors in this package
+**Currently, there are 4 very popular and efficient behaviors in this package
 - Automatic caching with many features
 - Automatic validation
+- Automatic logging of unknown errors
+- Logging slow commands
+**
 
 Add the package to your application using
 
@@ -27,12 +30,18 @@ Add the package to your application using
 ```bash
 dotnet add package MediatR.Useful.Behavior
 ```
+To use, you can add all behaviors at once. Or add each separately
+- AddAllBehaviors: Add all behaviors
+- AddCacheBehavior: Add behavior for cache
+- AddValidationBehavior: Add validation behavior
+- AddUnhandledExceptionBehavior: Add behavior for logging command exceptions
+- AddPerformanceBehavior: Add behavior for logging slow commands (commands that take more than 1 second with warning log)
 
 How to activate behaviors in the **Startup.cs(or Program.cs)** file
 
 ```csharp
-        // add AddAllBehaviors (cache, validation)
-        builder.Services.AddAllBehaviors();
+// add AddAllBehaviors (cache, validation, unhandled log, performance log)
+builder.Services.AddAllBehaviors();
 ```
 
 By doing this, behaviors are added to the system. Also, all your validations are added to the system
@@ -42,11 +51,11 @@ Your command must use the ICacheableRequest interface. This interface has severa
 
 To use cache, you must first introduce cache services to the system
 ```csharp
-        //for in memory cache (RAM)
-        builder.Services.AddMemoryCache();
+//for in memory cache (RAM)
+builder.Services.AddMemoryCache();
 
-        //for distribute cache(Redis, Sql, ...)
-        builder.Services.AddDistributedMemoryCache();
+//for distribute cache(Redis, Sql, ...)
+builder.Services.AddDistributedMemoryCache();
 ```
 
 ```csharp

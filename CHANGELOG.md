@@ -1,3 +1,6 @@
+## 1.0.4
+- add UnhandledExceptionBehaviour
+- add PerformanceBehaviour
 ## 1.0.3
 - update doc
 - add example

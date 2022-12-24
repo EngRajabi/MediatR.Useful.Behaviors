@@ -17,6 +17,10 @@
         </PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
+            v1.0.4
+            Breaking changes
+            - add UnhandledExceptionBehaviour
+            - add PerformanceBehaviour
             v1.0.3
             Breaking changes
             - update doc
