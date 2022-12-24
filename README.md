@@ -112,6 +112,13 @@ public sealed class TestCommandRqValidation : AbstractValidator<TestCommandRq>
 }
 ```
 
+**Performance Log**
+exmaple log
+
+ ```csharp
+Performance Long Running Request: TestCommandRq 3274 millisecond. {"amount":10000,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
+```
+
 ## Contributing
 
 Create an [issue](https://github.com/EngRajabi/MediatR.Useful.Behaviors/issues/new) if you find a BUG or have a Suggestion or Question. If you want to develop this project :
