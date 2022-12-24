@@ -30,8 +30,8 @@ public sealed class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavio
         {
             var requestName = typeof(TRequest).Name;
 
-            _logger.CompileLogStrObj(LogLevel.Warning, "Performance Long Running Request: ",
-                requestName, elapsedMilliseconds, request, null);
+            _logger.CompileLogMessage(LogLevel.Warning,
+                $"Performance Long Running Request: {requestName} {elapsedMilliseconds} millisecond. {request.ToJson()}");
         }
 
         return response;

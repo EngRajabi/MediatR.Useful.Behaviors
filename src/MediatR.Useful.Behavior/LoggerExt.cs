@@ -71,4 +71,5 @@ public static partial class LoggerExt
         Message = "{Message} {Param} {Param2} {Param3} {Param4}")]
     public static partial void CompileLogStrObj(this ILogger logger,
         LogLevel level, string message, object param, object param2, object param3, object param4);
+
 }
