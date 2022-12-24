@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using MediatR.Useful.Behavior.Model;
+using System.Text.Json.Serialization;
 
 namespace Example.Command;
 
@@ -20,6 +21,7 @@ public sealed class TestCommandRq : IRequest<TestCommandRs>, ICacheableRequest<T
     public int UserId { get; set; }
 
     public string CacheKey => $"myKey.{UserId}";
+    [JsonIgnore]
     public Func<TestCommandRs, DateTimeOffset> ConditionExpiration => static _ => DateTimeOffset.Now.AddSeconds(10);
     public bool UseMemoryCache => false;
 }
@@ -31,9 +33,11 @@ public sealed class TestCommandAdRq : IRequest<TestCommandRs>, ICacheableRequest
     public int UserId { get; set; }
 
     public string CacheKey => $"myKey.{UserId}";
+    [JsonIgnore]
     public Func<TestCommandRs, DateTimeOffset> ConditionExpiration => res =>
         UserId > 0 ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMinutes(1);
     public bool UseMemoryCache => false;
+    [JsonIgnore]
     public Func<TestCommandRs, bool> ConditionFroSetCache => rs => rs.Data?.Any() ?? false;
 }
 

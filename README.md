@@ -8,7 +8,7 @@
  </a>
 </p>
 
-# The best behaviors of Mediatr ( Enrich your mediatr project )
+# The best behaviors of MediatR ( Enrich your mediatr project )
 
 We all used mediatr many times. In mediatr, we have a very popular behavior feature that allows us to program aop and cross cutting. We have used it many times. 
 But it must have happened to you that you did not combine these behaviors together. 
@@ -17,9 +17,12 @@ In this package, I tried to collect the best and most useful behaviors of mediat
 
 **Package** - [MediatR.Useful.Behavior](https://www.nuget.org/packages/MediatR.Useful.Behavior/)
 
-Currently, there are 2 very popular and efficient behaviors in this package
+**Currently, there are 4 very popular and efficient behaviors in this package
 - Automatic caching with many features
 - Automatic validation
+- Automatic logging of unknown errors
+- Logging slow commands
+
 
 Add the package to your application using
 
@@ -27,26 +30,32 @@ Add the package to your application using
 ```bash
 dotnet add package MediatR.Useful.Behavior
 ```
+# To use, you can add all behaviors at once. Or add each separately
+- AddAllBehaviors: Add all behaviors
+- AddCacheBehavior: Add behavior for cache
+- AddValidationBehavior: Add validation behavior
+- AddUnhandledExceptionBehavior: Add behavior for logging command exceptions
+- AddPerformanceBehavior: Add behavior for logging slow commands (commands that take more than 1 second with warning log)
 
 How to activate behaviors in the **Startup.cs(or Program.cs)** file
 
 ```csharp
-        // add AddAllBehaviors (cache, validation)
-        builder.Services.AddAllBehaviors();
+// add AddAllBehaviors (cache, validation, unhandled log, performance log)
+builder.Services.AddAllBehaviors();
 ```
 
 By doing this, behaviors are added to the system. Also, all your validations are added to the system
 
-**Cache**
+# Cache
 Your command must use the ICacheableRequest interface. This interface has several properties that must be set
 
 To use cache, you must first introduce cache services to the system
 ```csharp
-        //for in memory cache (RAM)
-        builder.Services.AddMemoryCache();
+//for in memory cache (RAM)
+builder.Services.AddMemoryCache();
 
-        //for distribute cache(Redis, Sql, ...)
-        builder.Services.AddDistributedMemoryCache();
+//for distribute cache(Redis, Sql, ...)
+builder.Services.AddDistributedMemoryCache();
 ```
 
 ```csharp
@@ -56,6 +65,7 @@ public sealed class TestCommandRq : IRequest<TestCommandRs>, ICacheableRequest<T
     public int UserId { get; set; }
 
     public string CacheKey => $"myKey.{UserId}";
+    [JsonIgnore]
     public Func<TestCommandRs, DateTimeOffset> ConditionExpiration => static _ => DateTimeOffset.Now.AddSeconds(10);
     public bool UseMemoryCache => false;
 }
@@ -79,15 +89,17 @@ public sealed class TestCommandAdRq : IRequest<TestCommandRs>, ICacheableRequest
     public int UserId { get; set; }
 
     public string CacheKey => $"myKey.{UserId}";
-    public Func<TestCommandRs, DateTimeOffset> ConditionExpiration => rs =>
+    [JsonIgnore]
+    public Func<TestCommandRs, DateTimeOffset> ConditionExpiration => res =>
         UserId > 0 ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMinutes(1);
     public bool UseMemoryCache => false;
+    [JsonIgnore]
     public Func<TestCommandRs, bool> ConditionFroSetCache => rs => rs.Data?.Any() ?? false;
 }
 ```
 
 
-**Validation**
+# Validation
 Before executing your command, the system first executes all your validations.
 For validation, you only need to define your model in this way
  ```csharp
@@ -98,6 +110,26 @@ public sealed class TestCommandRqValidation : AbstractValidator<TestCommandRq>
         RuleFor(r => r.Amount).GreaterThan(0);
     }
 }
+```
+
+# Performance Log
+If the command takes more than 1 second. The system records a warning log. With complete specifications of the command and input data.
+example log
+
+```csharp
+Performance Long Running Request: TestCommandRq 3274 millisecond. {"amount":10000,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
+```
+
+# Unhandled Log
+If an Exception occurs in the command. This behavior records a log with full details.
+example log
+
+```csharp
+Exception Request: Unhandled Exception for Request TestCommandRq {"amount":0,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
+      FluentValidation.ValidationException: Validation failed:
+       -- Amount: 'Amount' must be greater than '0'. Severity: Error
+         at MediatR.Useful.Behavior.Behavior.ValidationBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in F:\Projects\mediatR-useful-behavior\src\MediatR.Useful.Behavior\Behavior\ValidationBehaviour.cs:line 36
+         at MediatR.Useful.Behavior.Behavior.UnhandledExceptionBehaviour`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in F:\Projects\mediatR-useful-behavior\src\MediatR.Useful.Behavior\Behavior\UnhandledExceptionBehaviour.cs:line 21
 ```
 
 ## Contributing
