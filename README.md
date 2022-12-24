@@ -120,7 +120,7 @@ example log
 Performance Long Running Request: TestCommandRq 3274 millisecond. {"amount":10000,"userId":0,"cacheKey":"myKey.0","useMemoryCache":false}
 ```
 
-# Unhandle Log
+# Unhandled Log
 If an Exception occurs in the command. This behavior records a log with full details.
 example log
 
