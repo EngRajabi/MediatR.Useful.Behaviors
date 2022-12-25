@@ -8,15 +8,18 @@
             In this repository; I tried to write and save the best popular behaviors that we use in mediatr in a professional way. And they will be added and improved over time.
             The best library to complete mediatr
         </Description>
-        <Version>1.0.4</Version>
-        <AssemblyVersion>1.0.4</AssemblyVersion>
-        <PackageVersion>1.0.4</PackageVersion>
+        <Version>1.0.5</Version>
+        <AssemblyVersion>1.0.5</AssemblyVersion>
+        <PackageVersion>1.0.5</PackageVersion>
         <PackageTags>
             mediatr;mediator;behavior;response;cache;validation;behaviors;distributedcache;fluent;fluentvalidation;distributecache;MediatR Useful Behavior;
             enrich;enrichmediatr
         </PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
+            v1.0.5
+            Breaking changes
+            - change packages
             v1.0.4
             Breaking changes
             - add UnhandledExceptionBehaviour
@@ -53,13 +56,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
-        <PackageReference Include="FluentValidation" Version="11.4.0" />
-        <PackageReference Include="MediatR" Version="11.1.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-        <PackageReference Include="System.Text.Json" Version="7.0.1" />
-        <PackageReference Include="Scrutor" Version="4.2.0" />
+        <PackageReference Include="FluentValidation" Version="10.4.0" />
+        <PackageReference Include="MediatR" Version="11.0.0" />
+        <PackageReference Include="System.Text.Json" Version="6.0.0" />
+        <PackageReference Include="Scrutor" Version="4.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
     </ItemGroup>
 
 </Project>
