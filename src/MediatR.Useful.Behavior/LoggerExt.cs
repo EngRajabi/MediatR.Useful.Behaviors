@@ -63,13 +63,11 @@ public static partial class LoggerExt
     public static partial void CompileLogMessageStr(this ILogger logger,
         LogLevel level, string message, string param);
 
-
-
     [LoggerMessage(
         EventId = 8,
-        EventName = "CompileLogStrObj",
+        EventName = "CompileLogStrObjWithoutExp",
         Message = "{Message} {Param} {Param2} {Param3} {Param4}")]
-    public static partial void CompileLogStrObj(this ILogger logger,
+    public static partial void CompileLogStrObjWithoutExp(this ILogger logger,
         LogLevel level, string message, object param, object param2, object param3, object param4);
 
 }
