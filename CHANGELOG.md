@@ -1,3 +1,5 @@
+## 1.0.5
+- change packages
 ## 1.0.4
 - add UnhandledExceptionBehaviour
 - add PerformanceBehaviour
