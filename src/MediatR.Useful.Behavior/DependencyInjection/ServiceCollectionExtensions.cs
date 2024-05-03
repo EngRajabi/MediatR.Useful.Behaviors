@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MediatR.Useful.Behavior.Behavior;
+using MediatR.Useful.Behavior.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -8,6 +9,7 @@ public static class ServiceCollectionExtensions
 {
     public static void AddAllBehaviors(this IServiceCollection services)
     {
+        services.AddRateLimitBehavior();
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
@@ -43,5 +45,18 @@ public static class ServiceCollectionExtensions
     public static void AddPerformanceBehavior(this IServiceCollection services)
     {
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+    }
+
+    /// <summary>
+    /// This behavior is suggested to be invoked at the beginning, prior to other behaviors
+    /// to intercept and handle rate limiting concerns before other processes are executed.
+    /// </summary>
+    public static void AddRateLimitBehavior(this IServiceCollection services)
+    {
+        services.AddSingleton<IRateLimitStore, DistributedCacheRateLimitStore>();
+        services.AddScoped<IRateLimitStore, MemoryCacheRateLimitStore>();
+        services.AddScoped<IRateLimitStoreStrategy, RateLimitStoreStrategy>();
+
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RateLimitBehavior<,>));
     }
 }
