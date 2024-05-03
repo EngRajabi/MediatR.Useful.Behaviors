@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MediatR.Useful.Behavior.Repository;
+namespace MediatR.Useful.Behavior.RateLimitStore;
 
 public class RateLimitRule
 {

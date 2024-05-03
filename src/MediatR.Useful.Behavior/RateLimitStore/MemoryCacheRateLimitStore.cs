@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Useful.Behavior.Repository;
+namespace MediatR.Useful.Behavior.RateLimitStore;
 public sealed class MemoryCacheRateLimitStore : IRateLimitStore
 {
     public bool UseMemoryCache => true;
@@ -48,6 +48,6 @@ public sealed class MemoryCacheRateLimitStore : IRateLimitStore
         if (!_memoryCache.TryGetValue(key, out RateLimitCounter cacheEntry))
             return Task.FromResult<RateLimitCounter>(null);
 
-        return Task.FromResult<RateLimitCounter>(cacheEntry);
+        return Task.FromResult(cacheEntry);
     }
 }

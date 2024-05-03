@@ -1,4 +1,4 @@
-﻿namespace MediatR.Useful.Behavior.Repository;
+﻿namespace MediatR.Useful.Behavior.RateLimitStore;
 
 public interface IRateLimitStoreStrategy
 {

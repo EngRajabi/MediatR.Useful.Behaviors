@@ -1,5 +1,5 @@
 ﻿using MediatR.Useful.Behavior.Model;
-using MediatR.Useful.Behavior.Repository;
+using MediatR.Useful.Behavior.RateLimitStore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

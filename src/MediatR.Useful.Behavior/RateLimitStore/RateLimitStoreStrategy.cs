@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MediatR.Useful.Behavior.Repository;
+namespace MediatR.Useful.Behavior.RateLimitStore;
 
 public sealed class RateLimitStoreStrategy : IRateLimitStoreStrategy
 {

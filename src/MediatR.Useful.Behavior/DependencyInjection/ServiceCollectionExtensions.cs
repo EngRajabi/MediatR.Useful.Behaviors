@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MediatR.Useful.Behavior.Behavior;
-using MediatR.Useful.Behavior.Repository;
+using MediatR.Useful.Behavior.RateLimitStore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

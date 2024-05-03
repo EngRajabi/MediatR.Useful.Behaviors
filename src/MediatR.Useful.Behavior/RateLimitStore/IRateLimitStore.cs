@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Useful.Behavior.Repository;
+namespace MediatR.Useful.Behavior.RateLimitStore;
 public interface IRateLimitStore
 {
     bool UseMemoryCache { get; }

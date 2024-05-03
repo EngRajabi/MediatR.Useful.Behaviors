@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using MediatR;
 using MediatR.Useful.Behavior.Behavior;
-using MediatR.Useful.Behavior.Repository;
+using MediatR.Useful.Behavior.RateLimitStore;
 using Moq;
 using System;
 using System.Threading.Tasks;
