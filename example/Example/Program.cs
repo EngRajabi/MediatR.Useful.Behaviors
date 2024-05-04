@@ -20,7 +20,7 @@ public static class Program
         builder.Services.AddMemoryCache();
         builder.Services.AddDistributedMemoryCache();
 
-        // add AddAllBehaviors (cache, validation, unhandled log, performance log)
+        // add AddAllBehaviors (rate limit,cache, validation, unhandled log, performance log)
         builder.Services.AddAllBehaviors();
 
         var app = builder.Build();

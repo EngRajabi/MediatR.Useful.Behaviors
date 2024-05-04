@@ -48,4 +48,12 @@ public class WeatherForecastController : ControllerBase
 
         return Ok(commandRs);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> TestRateLimit()
+    {
+        var commandRs = await _mediator.Send(new GetUserByRateLimitCommandReq(), default);
+
+        return Ok(commandRs);
+    }
 }
