@@ -98,6 +98,51 @@ public sealed class TestCommandAdRq : IRequest<TestCommandRs>, ICacheableRequest
 }
 ```
 
+# Rate Limit
+To implement rate limiting for your commands, you can use the `IRateLimitRequest<T>` interface. 
+
+To use cache, you must first introduce cache services to the system.
+
+```csharp
+public sealed class GetUserByRateLimitCommandReq : IRequest<GetUserByRateLimitCommandRes>,
+     IRateLimitRequest<GetUserByRateLimitCommandRes>
+{
+    public string RateLimitCacheKey => $"test.getUserByRateLimit";
+    public int PermitLimit => 10;
+    public Func<GetUserByRateLimitCommandRes, bool> ConditionForIncrement => _ => true;
+    public Func<GetUserByRateLimitCommandRes, TimeSpan> ConditionWindowTime => _ => TimeSpan.FromSeconds(30);
+    public bool UseMemoryCache => true;
+}
+```
+Properties
+- RateLimitCacheKey:
+ RateLimitCacheKey is your cache key. You can consider a simple key or the key can be a combination of values.
+- UseMemoryCache:
+ If the specified value of UseMemoryCache is true, it means to use the memory cache. Otherwise, use distributed cache.
+- PermitLimit:
+ The maximum number of requests allowed within the specified time window.
+- ConditionForIncrement:
+ A function that determines whether a request should count towards the rate limit. If not specified, all requests are counted. 
+ For example, you may want to increment the rate limit count only for successful requests.
+- ConditionWindowTime:
+ With ConditionWindowTime, you can consider a condition for the time window of the rate limit.
+
+ Advanced example:
+ ```csharp
+public sealed class GetUserByRateLimitCommandReq : IRequest<GetUserByRateLimitCommandRes>,
+     IRateLimitRequest<GetUserByRateLimitCommandRes>
+{
+
+    public string RateLimitCacheKey => $"test.getUserByRateLimit";
+    public int PermitLimit => 10;
+    [JsonIgnore]
+    public Func<GetUserByRateLimitCommandRes, bool> ConditionForIncrement => rs => rs.Data?.Any() ?? false;
+    [JsonIgnore]
+    public Func<GetUserByRateLimitCommandRes, TimeSpan> ConditionWindowTime => res =>
+        res.IsActive ? TimeSpan.FromSeconds(30) : TimeSpan.FromMinutes(2);
+    public bool UseMemoryCache => true;
+}
+```
 
 # Validation
 Before executing your command, the system first executes all your validations.
