@@ -8,36 +8,18 @@
             In this repository; I tried to write and save the best popular behaviors that we use in mediatr in a professional way. And they will be added and improved over time.
             The best library to complete mediatr
         </Description>
-        <Version>1.0.5</Version>
-        <AssemblyVersion>1.0.5</AssemblyVersion>
-        <PackageVersion>1.0.5</PackageVersion>
+        <Version>1.0.6</Version>
+        <AssemblyVersion>1.0.6</AssemblyVersion>
+        <PackageVersion>1.0.6</PackageVersion>
         <PackageTags>
             mediatr;mediator;behavior;response;cache;validation;behaviors;distributedcache;fluent;fluentvalidation;distributecache;MediatR Useful Behavior;
             enrich;enrichmediatr
         </PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
-            v1.0.5
-            Breaking changes
-            - change packages
-            v1.0.4
-            Breaking changes
-            - add UnhandledExceptionBehaviour
-            - add PerformanceBehaviour
-            v1.0.3
-            Breaking changes
-            - update doc
-            - add example
-            v1.0.2
-            Breaking changes
-            - add Scrutor for automatic validator added
-            v1.0.1
-            Breaking changes
-            - clean up dependency
-            v1.0.0
-            Breaking changes
-            - add cache behavior
-            - add valdiation behavior
+            v1.0.6
+            - update net 8
+            - add rate limit Behavior
         </PackageReleaseNotes>
         <Title>MediatR Useful Behavior</Title>
         <PackageIcon>icon.png</PackageIcon>
@@ -56,13 +38,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation" Version="10.4.0" />
-        <PackageReference Include="MediatR" Version="11.0.0" />
-        <PackageReference Include="System.Text.Json" Version="6.0.0" />
-        <PackageReference Include="Scrutor" Version="4.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
+        <PackageReference Include="FluentValidation" Version="11.6.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="System.Text.Json" Version="8.0.3" />
+        <PackageReference Include="Scrutor" Version="4.2.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Microsoft.SourceLink.GitHub" Version="8.0.0" />
     </ItemGroup>
 
 </Project>

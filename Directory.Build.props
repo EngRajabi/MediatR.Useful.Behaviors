@@ -15,8 +15,14 @@
       CA1054: Change the type of parameter of the method to allow a Uri to be passed as a 'System.Uri' object
       CA1055: Change the return type of method from 'string' to 'System.Uri'
     -->
-        <NoWarn>$(NoWarn);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002</NoWarn>
-        <NoError>$(NoError);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002</NoError>
+        <NoWarn>
+            $(NoWarn);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002;CA1002;CA1031;
+            CA1724;CA1822;CA1860;CA2227
+        </NoWarn>
+        <NoError>
+            $(NoError);SCS0004;MA0016;MA0048;MA0039;MA0025;MA0055;MA0002;CA1002;CA1031;
+            CA1724;CA1822;CA1860;CA2227
+        </NoError>
         <ReportAnalyzer>true</ReportAnalyzer>
         <AnalysisMode>All</AnalysisMode>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -37,12 +43,12 @@
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0">
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.4.27">
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.10.48">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
@@ -52,22 +58,22 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Roslynator.Analyzers" Version="4.2.0">
+        <PackageReference Include="Roslynator.Analyzers" Version="4.12.3">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.2.0">
+        <PackageReference Include="Roslynator.CodeAnalysis.Analyzers" Version="4.12.3">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.2.0">
+        <PackageReference Include="Roslynator.Formatting.Analyzers" Version="4.12.3">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Meziantou.Analyzer" Version="1.0.757">
+        <PackageReference Include="Meziantou.Analyzer" Version="2.0.150">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

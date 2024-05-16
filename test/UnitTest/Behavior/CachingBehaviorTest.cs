@@ -52,9 +52,9 @@ public sealed class CachingBehaviorTest : TestBase
         //Assert
         _behaviourDelegate.Verify(r => r.Invoke(), Times.Exactly(countBehaviurCall));
         _cahce.Verify(r => r.GetAsync(
-                It.Is<string>(r => r.Equals(requestCommandRq.CacheKey)), default), Times.Exactly(callGetCache));
+                It.Is<string>(r => r.Equals(requestCommandRq.CacheKey, StringComparison.OrdinalIgnoreCase)), default), Times.Exactly(callGetCache));
 
-        _cahce.Verify(r => r.SetAsync(It.Is<string>(r => r.Equals(requestCommandRq.CacheKey)),
+        _cahce.Verify(r => r.SetAsync(It.Is<string>(r => r.Equals(requestCommandRq.CacheKey, StringComparison.OrdinalIgnoreCase)),
             resultBehaviour.ToJsonUtf8Bytes(), It.Is<DistributedCacheEntryOptions>(r =>
                 Math.Abs((r.AbsoluteExpiration.Value - requestCommandRq.ConditionExpiration(resultBehaviour)).TotalSeconds) < 10),
             default), Times.Exactly(callSetCache));
