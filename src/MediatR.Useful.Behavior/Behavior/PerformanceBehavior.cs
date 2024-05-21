@@ -4,13 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace MediatR.Useful.Behavior.Behavior;
-public sealed class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public sealed class PerformanceBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     private readonly Stopwatch _timer;
     private readonly ILogger<TRequest> _logger;
 
-    public PerformanceBehaviour(ILogger<TRequest> logger)
+    public PerformanceBehavior(ILogger<TRequest> logger)
     {
         _timer = new Stopwatch();
         _logger = logger;

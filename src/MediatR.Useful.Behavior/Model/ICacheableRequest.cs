@@ -13,7 +13,7 @@ public interface ICacheableRequest<T> where T : class, new()
     bool UseMemoryCache { get; }
 
     [JsonIgnore]
-    virtual Func<T, bool> ConditionFroSetCache => null;
+    virtual Func<T, bool> ConditionForSettingCache => null;
 
 }
 public interface ICacheInvalidatorRequest

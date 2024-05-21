@@ -18,7 +18,7 @@ public sealed class GetUserPointCommandReq : IRequest<GetUserPointCommandRes>,
         Func<GetUserPointCommandRes, bool> conditionFroSetCache, bool useMemoryCache = false)
     {
         ConditionExpiration = conditionExpiration;
-        ConditionFroSetCache = conditionFroSetCache;
+        ConditionForSettingCache = conditionFroSetCache;
         UseMemoryCache = useMemoryCache;
         UserId = Guid.NewGuid().ToString();
     }
@@ -28,7 +28,7 @@ public sealed class GetUserPointCommandReq : IRequest<GetUserPointCommandRes>,
     public string CacheKey => $"test.userpoint.{UserId}";
     public Func<GetUserPointCommandRes, DateTimeOffset> ConditionExpiration { get; }
     public bool UseMemoryCache { get; }
-    public Func<GetUserPointCommandRes, bool> ConditionFroSetCache { get; }
+    public Func<GetUserPointCommandRes, bool> ConditionForSettingCache { get; }
 }
 
 public sealed class GetUserPointCommandReqValidator : AbstractValidator<GetUserPointCommandReq>

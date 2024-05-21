@@ -8,18 +8,18 @@
             In this repository; I tried to write and save the best popular behaviors that we use in mediatr in a professional way. And they will be added and improved over time.
             The best library to complete mediatr
         </Description>
-        <Version>1.0.6</Version>
-        <AssemblyVersion>1.0.6</AssemblyVersion>
-        <PackageVersion>1.0.6</PackageVersion>
+        <Version>1.0.7</Version>
+        <AssemblyVersion>1.0.7</AssemblyVersion>
+        <PackageVersion>1.0.7</PackageVersion>
         <PackageTags>
             mediatr;mediator;behavior;response;cache;validation;behaviors;distributedcache;fluent;fluentvalidation;distributecache;MediatR Useful Behavior;
             enrich;enrichmediatr
         </PackageTags>
         <PackageId>MediatR.Useful.Behavior</PackageId>
         <PackageReleaseNotes>
-            v1.0.6
-            - update net 8
-            - add rate limit Behavior
+            v1.0.7
+            - some spelling mistakes have been corrected.
+            - renamed ConditionFroSetCache to ConditionForSettingCache
         </PackageReleaseNotes>
         <Title>MediatR Useful Behavior</Title>
         <PackageIcon>icon.png</PackageIcon>

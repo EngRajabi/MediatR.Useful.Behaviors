@@ -29,10 +29,10 @@ public sealed class CachingBehaviorTest : TestBase
 
     [Theory]
     [MemberData(nameof(TestCases))]
-    public async Task CheckDistributeCache(GetUserPointCommandRes resultBehaviour, GetUserPointCommandRes resultCache,
+    public async Task CheckDistributeCache(GetUserPointCommandRes resultBehavior, GetUserPointCommandRes resultCache,
         Func<GetUserPointCommandRes, DateTimeOffset> conditionExpiration,
         Func<GetUserPointCommandRes, bool> conditionFroSetCache,
-        int countBehaviurCall, int callGetCache, int callSetCache)
+        int countBehaviorCall, int callGetCache, int callSetCache)
     {
         //Arrange
         var requestCommandRq = new GetUserPointCommandReq(conditionExpiration, conditionFroSetCache);
@@ -40,26 +40,26 @@ public sealed class CachingBehaviorTest : TestBase
             GetUserPointCommandRes>(_cahce.Object, _memoryCache.Object);
 
         _behaviourDelegate.Setup(r => r.Invoke())
-            .ReturnsAsync(resultBehaviour);
+            .ReturnsAsync(resultBehavior);
 
         _cahce.Setup(r => r.GetAsync(It.IsAny<string>(), default))
             .ReturnsAsync(resultCache.ToJsonUtf8Bytes());
 
 
         //Act
-        var handle = await RunBehaviour(behavior, requestCommandRq, _behaviourDelegate.Object);
+        var handle = await RunBehavior(behavior, requestCommandRq, _behaviourDelegate.Object);
 
         //Assert
-        _behaviourDelegate.Verify(r => r.Invoke(), Times.Exactly(countBehaviurCall));
+        _behaviourDelegate.Verify(r => r.Invoke(), Times.Exactly(countBehaviorCall));
         _cahce.Verify(r => r.GetAsync(
                 It.Is<string>(r => r.Equals(requestCommandRq.CacheKey, StringComparison.OrdinalIgnoreCase)), default), Times.Exactly(callGetCache));
 
         _cahce.Verify(r => r.SetAsync(It.Is<string>(r => r.Equals(requestCommandRq.CacheKey, StringComparison.OrdinalIgnoreCase)),
-            resultBehaviour.ToJsonUtf8Bytes(), It.Is<DistributedCacheEntryOptions>(r =>
-                Math.Abs((r.AbsoluteExpiration.Value - requestCommandRq.ConditionExpiration(resultBehaviour)).TotalSeconds) < 10),
+            resultBehavior.ToJsonUtf8Bytes(), It.Is<DistributedCacheEntryOptions>(r =>
+                Math.Abs((r.AbsoluteExpiration.Value - requestCommandRq.ConditionExpiration(resultBehavior)).TotalSeconds) < 10),
             default), Times.Exactly(callSetCache));
 
-        handle.Should().BeEquivalentTo(resultBehaviour ?? resultCache);
+        handle.Should().BeEquivalentTo(resultBehavior ?? resultCache);
     }
 
     public static IEnumerable<object[]> TestCases
@@ -76,7 +76,7 @@ public sealed class CachingBehaviorTest : TestBase
                 null,
                 (Func<GetUserPointCommandRes, DateTimeOffset>) (x => DateTimeOffset.Now.AddMinutes(10)),
                 null,
-                //behavoiur
+                //behavior
                 1,
                 //get cache
                 1,
@@ -91,7 +91,7 @@ public sealed class CachingBehaviorTest : TestBase
                 null,
                 null,
                 null,
-                //behavoiur
+                //behavior
                 1,
                 //get cache
                 1,
@@ -106,7 +106,7 @@ public sealed class CachingBehaviorTest : TestBase
                 null,
                 null,
                 null,
-                //behavoiur
+                //behavior
                 1,
                 //get cache
                 1,
@@ -124,7 +124,7 @@ public sealed class CachingBehaviorTest : TestBase
                 },
                 null,
                 null,
-                //behavoiur
+                //behavior
                 0,
                 //get cache
                 1,
@@ -142,7 +142,7 @@ public sealed class CachingBehaviorTest : TestBase
                 null,
                 (Func<GetUserPointCommandRes, DateTimeOffset>) (x => DateTimeOffset.Now.AddMinutes(10)),
                 (Func<GetUserPointCommandRes, bool>)(res => true),
-                //behavoiur
+                //behavior
                 1,
                 //get cache
                 1,
@@ -160,7 +160,7 @@ public sealed class CachingBehaviorTest : TestBase
                 null,
                 (Func<GetUserPointCommandRes, DateTimeOffset>) (x => DateTimeOffset.Now.AddMinutes(10)),
                 (Func<GetUserPointCommandRes, bool>)(res => false),
-                //behavoiur
+                //behavior
                 1,
                 //get cache
                 1,

@@ -38,7 +38,7 @@ public sealed class TestCommandAdRq : IRequest<TestCommandRs>, ICacheableRequest
         UserId > 0 ? DateTimeOffset.Now.AddMinutes(10) : DateTimeOffset.Now.AddMinutes(1);
     public bool UseMemoryCache => false;
     [JsonIgnore]
-    public Func<TestCommandRs, bool> ConditionFroSetCache => rs => rs.Data?.Any() ?? false;
+    public Func<TestCommandRs, bool> ConditionForSettingCache => rs => rs.Data?.Any() ?? false;
 }
 
 

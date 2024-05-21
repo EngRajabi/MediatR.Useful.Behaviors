@@ -42,7 +42,7 @@ public sealed class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRe
 
                 response = await next().ConfigureAwait(false);
 
-                if (response is not null && (cacheable.ConditionFroSetCache is null || cacheable.ConditionFroSetCache(response)))
+                if (response is not null && (cacheable.ConditionForSettingCache is null || cacheable.ConditionForSettingCache(response)))
                     await _distributedCache.SetAsync(cacheable.CacheKey, response.ToJsonUtf8Bytes(), new DistributedCacheEntryOptions
                     {
                         AbsoluteExpiration = cacheable.ConditionExpiration(response)
@@ -57,7 +57,7 @@ public sealed class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRe
 
             response = await next().ConfigureAwait(false);
 
-            if (response is not null && (cacheable.ConditionFroSetCache is null || cacheable.ConditionFroSetCache(response)))
+            if (response is not null && (cacheable.ConditionForSettingCache is null || cacheable.ConditionForSettingCache(response)))
                 _memoryCache.Set(cacheable.CacheKey, response, cacheable.ConditionExpiration(response));
 
             return response;

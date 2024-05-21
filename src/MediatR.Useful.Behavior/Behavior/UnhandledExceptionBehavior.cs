@@ -4,12 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace MediatR.Useful.Behavior.Behavior;
-public sealed class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public sealed class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<TRequest> _logger;
 
-    public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
+    public UnhandledExceptionBehavior(ILogger<TRequest> logger)
     {
         _logger = logger;
     }

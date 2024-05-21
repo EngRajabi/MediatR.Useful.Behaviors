@@ -10,11 +10,11 @@ using Xunit;
 
 namespace UnitTest.Behavior;
 
-public sealed class ValidationBehaviourTest : TestBase
+public sealed class ValidationBehaviorTest : TestBase
 {
     private readonly Mock<RequestHandlerDelegate<GetUserPointCommandRes>> _behaviourDelegate;
 
-    public ValidationBehaviourTest()
+    public ValidationBehaviorTest()
     {
         _behaviourDelegate = new Mock<RequestHandlerDelegate<GetUserPointCommandRes>>();
     }
@@ -23,14 +23,14 @@ public sealed class ValidationBehaviourTest : TestBase
     [Theory]
     [MemberData(nameof(TestCases))]
     public async Task CheckDistributeCache(GetUserPointCommandReq requestCommandRq,
-        int countBehaviurCall, bool isExp, GetUserPointCommandRes result)
+        int countBehaviorCall, bool isExp, GetUserPointCommandRes result)
     {
         //Arrange
         var validators = new List<IValidator<GetUserPointCommandReq>>
         {
             new GetUserPointCommandReqValidator()
     };
-        var behavior = new ValidationBehaviour<GetUserPointCommandReq,
+        var behavior = new ValidationBehavior<GetUserPointCommandReq,
             GetUserPointCommandRes>(validators);
 
         _behaviourDelegate.Setup(r => r.Invoke())
@@ -41,7 +41,7 @@ public sealed class ValidationBehaviourTest : TestBase
         try
         {
             //Act
-            handle = await RunBehaviour(behavior, requestCommandRq, _behaviourDelegate.Object);
+            handle = await RunBehavior(behavior, requestCommandRq, _behaviourDelegate.Object);
         }
         catch
         {
@@ -49,7 +49,7 @@ public sealed class ValidationBehaviourTest : TestBase
         }
 
         //Assert
-        _behaviourDelegate.Verify(r => r.Invoke(), Times.Exactly(countBehaviurCall));
+        _behaviourDelegate.Verify(r => r.Invoke(), Times.Exactly(countBehaviorCall));
         exp.Should().Be(isExp);
 
         handle.Should().BeEquivalentTo(result);
