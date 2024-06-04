@@ -17,12 +17,12 @@ In this package, I tried to collect the best and most useful behaviors of mediat
 
 **Package** - [MediatR.Useful.Behavior](https://www.nuget.org/packages/MediatR.Useful.Behavior/)
 
-**Currently, there are 4 very popular and efficient behaviors in this package
+**Currently, there are 5 very popular and efficient behaviors in this package
 - Automatic caching with many features
 - Automatic validation
 - Automatic logging of unknown errors
 - Logging slow commands
-
+- Rate Limit
 
 Add the package to your application using
 
@@ -36,7 +36,8 @@ dotnet add package MediatR.Useful.Behavior
 - AddValidationBehavior: Add validation behavior
 - AddUnhandledExceptionBehavior: Add behavior for logging command exceptions
 - AddPerformanceBehavior: Add behavior for logging slow commands (commands that take more than 1 second with warning log)
-
+- AddRateLimitBehavior: Add behavior for rate limiting to control the rate of requests
+  
 How to activate behaviors in the **Startup.cs(or Program.cs)** file
 
 ```csharp
