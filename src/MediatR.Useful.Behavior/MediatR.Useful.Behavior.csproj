@@ -43,7 +43,7 @@
         <PackageReference Include="System.Text.Json" Version="8.0.3" />
         <PackageReference Include="Scrutor" Version="4.2.2" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
         <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
     </ItemGroup>
 
